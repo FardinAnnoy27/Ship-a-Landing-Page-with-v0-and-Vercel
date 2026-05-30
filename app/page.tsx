@@ -84,10 +84,8 @@ function HeroView({ onNavigate }: { onNavigate: () => void }) {
 
           {/* Main headline */}
           <h1 className="text-5xl xl:text-6xl 2xl:text-7xl font-bold leading-tight">
-            <span className="text-[#E9D5FF]">UPGRADE YOUR</span>
-            <br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#6366F1] via-[#A855F7] to-[#C084FC]">
-              COGNITIVE REALITY.
+              Welcome to My Store
             </span>
           </h1>
 
