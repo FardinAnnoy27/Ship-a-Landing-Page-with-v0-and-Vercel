@@ -98,9 +98,3 @@ This project connects three powerful modern tools into a seamless automation pip
 * Review the code, submit the new PR, and merge it. Vercel will immediately build the new version in the background and swap users to it instantly without taking the site offline.
 
 ---
-
-## 🧹 Infrastructure Cleanup
-
-Because this architecture runs entirely on the **hobby/free tiers** of v0, GitHub, and Vercel, there are zero active running costs or surprise bills. If you want to delete the project later, you can safely remove the repository from GitHub and delete the project from your Vercel dashboard settings.
-
----
