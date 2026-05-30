@@ -9,10 +9,22 @@ import {
   useStripe,
   useElements,
 } from '@stripe/react-stripe-js'
-import { loadStripe } from '@stripe/stripe-js'
+import { loadStripe, Stripe } from '@stripe/stripe-js'
 import { createPaymentIntent } from '@/app/actions/stripe'
 
-const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!)
+let stripePromise: Promise<Stripe | null> | null = null
+
+function getStripe() {
+  if (!stripePromise) {
+    const key = process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY
+    if (!key) {
+      console.error('Stripe publishable key is not configured')
+      return null
+    }
+    stripePromise = loadStripe(key)
+  }
+  return stripePromise
+}
 
 const elementStyles = {
   style: {
@@ -217,9 +229,22 @@ export default function Checkout({ productId }: { productId: string }) {
     )
   }
 
+  const stripeInstance = getStripe()
+
+  if (!stripeInstance) {
+    return (
+      <div className="h-full flex items-center justify-center">
+        <div className="text-red-400 text-center p-4">
+          <p>Payment system is not configured.</p>
+          <p className="text-sm mt-2 text-[#E9D5FF]/60">Please contact support.</p>
+        </div>
+      </div>
+    )
+  }
+
   return (
     <Elements
-      stripe={stripePromise}
+      stripe={stripeInstance}
       options={{
         clientSecret,
         appearance: {
